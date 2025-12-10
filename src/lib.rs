@@ -1,10 +1,16 @@
 use anyhow::Result;
 
-pub fn find_matches(content: &str, pattern: &str, mut writer: impl std::io::Write) -> Result<()> {
-    for line in content.lines() {
+pub fn find_matches(
+    mut reader: impl std::io::BufRead,
+    pattern: &str,
+    mut writer: impl std::io::Write,
+) -> Result<()> {
+    let mut line = String::new();
+    while reader.read_line(&mut line)? > 0 {
         if line.contains(pattern) {
-            writeln!(writer, "{}", line)?;
+            write!(writer, "{}", line)?;
         }
+        line.clear();
     }
     Ok(())
 }

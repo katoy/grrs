@@ -2,6 +2,11 @@
 name = "grrs"
 version = "0.1.0"
 edition = "2024"
+description = "A simple grep-like tool"
+authors = ["katoy <youichikato@gmail.com>"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/study-rust/grrs"
 
 [dependencies]
 anyhow = "1.0.100"

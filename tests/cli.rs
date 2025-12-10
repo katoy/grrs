@@ -6,7 +6,12 @@ use predicates::prelude::*; // Used for writing assertions
 #[test]
 fn find_a_match() {
     let mut result = Vec::new();
-    find_matches("lorem ipsum\ndolor sit amet", "lorem", &mut result).unwrap();
+    find_matches(
+        "lorem ipsum\ndolor sit amet".as_bytes(),
+        "lorem",
+        &mut result,
+    )
+    .unwrap();
     assert_eq!(result, b"lorem ipsum\n");
 }
 

@@ -14,10 +14,11 @@ struct Cli {
 fn main() -> Result<()> {
     let args = Cli::parse();
 
-    let content = std::fs::read_to_string(&args.path)
+    let file = std::fs::File::open(&args.path)
         .with_context(|| format!("could not read file `{}`", args.path.display()))?;
+    let reader = std::io::BufReader::new(file);
 
-    find_matches(&content, &args.pattern, &mut std::io::stdout())?;
+    find_matches(reader, &args.pattern, &mut std::io::stdout())?;
 
     Ok(())
 }
